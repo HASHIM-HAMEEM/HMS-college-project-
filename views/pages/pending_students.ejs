@@ -1,0 +1,74 @@
+<%- include('../Utils/header'); -%>
+
+<div class="main-panel">
+    <!-- Table of students  -->
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Pending Student</li>
+                    </ol>
+                </nav>
+                <%- include('../Utils/alert'); -%>
+                <h4 class="card-title">All Students</h4>
+                <div class="table-responsive pt-3">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>S no.</th>
+                                <th>Roll no.</th>
+                                <th> Full name</th>
+                                <th>Address </th>
+                                <th> Phone no.</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(data1.length){ for(var i=0; i< data1.length; i++) {%>
+                            <% if(data1[i].s_status == 'active'){%>
+                            <tr class="table-info">
+                                <% } else{ %>
+                            <tr class="table-warning">
+                                <% } %>
+                                <td><%= data1[i].s_no%></td>
+                                <td><%= data1[i].s_rollno%></td>
+                                <td>
+                                    <%= data1[i].s_name%>
+                                </td>
+                                <td>
+                                    <%= data1[i].s_address%>
+                                </td>
+                                <td>
+                                    <%= data1[i].s_phone%>
+                                </td>
+                                <td>
+                                    <%= data1[i].s_approved%>
+                                </td>
+                                <td>
+                                    <a href="Pending_Students/<%= data1[i].s_rollno%>">
+                                        <button type="button" class="btn btn-inverse-dark "><i class="ti-eye"></i>
+                                            Check</button></a>
+                                </td>
+                            </tr>
+                            <% } }else{ %>
+                            <tr>
+                                <td colspan="3">No Student</td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <%- include('../Utils/footer'); -%>

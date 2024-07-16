@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Add Student</title>
+    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
+    <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="images/TDlogo.png" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <nav aria-label="breadcrumb">
+                <h1>Add Student</h1>
+                <p class="text-info">
+                  Fill in the details to add a new student
+                </p>
+              </nav>
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo text-center">
+                  <img src="images/TDlogo.png" alt="THE DAWG LOGO" />
+                </div>
+                <%- include('../Utils/alert'); -%>
+                <h4 class="font-weight-light">Student Information</h4>
+                <form
+                  class="pt-3"
+                  method="post"
+                  action="/Add_Student"
+                  enctype="multipart/form-data"
+                >
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="sname"
+                      class="form-control form-control-lg"
+                      placeholder="Student Name"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="usn"
+                      class="form-control form-control-lg"
+                      placeholder="USN"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      name="semail"
+                      class="form-control form-control-lg"
+                      placeholder="Email"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <textarea
+                      name="saddress"
+                      class="form-control form-control-lg"
+                      rows="3"
+                      placeholder="Address"
+                      required
+                    ></textarea>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="tel"
+                      name="sphone"
+                      class="form-control form-control-lg"
+                      placeholder="Phone Number"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="date"
+                      name="sdob"
+                      class="form-control form-control-lg"
+                      placeholder="Date of Birth"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="sroomNo"
+                      class="form-control form-control-lg"
+                      placeholder="Room Number"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      name="sparantage"
+                      class="form-control form-control-lg"
+                      placeholder="Parent Age"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="simage" class="form-label">Student Photo</label>
+                    <input
+                      type="file"
+                      name="simage"
+                      id="simage"
+                      class="form-control form-control-lg"
+                      accept="image/*"
+                      required
+                    />
+                  </div>
+                  <div class="mt-3">
+                    <button
+                      type="submit"
+                      class="btn btn-primary btn-lg btn-block"
+                    >
+                      Add Student
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="vendors/base/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="js/off-canvas.js"></script>
+    <script src="js/hoverable-collapse.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/todolist.js"></script>
+    <!-- endinject -->
+  </body>
+</html>

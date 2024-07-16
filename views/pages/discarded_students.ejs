@@ -1,0 +1,65 @@
+<%- include('../Utils/header'); -%>
+
+
+
+
+<div class="main-panel">
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <%- include('../Utils/alert'); -%>
+                <h4 class="card-title">All Students</h4>
+                <div class="table-responsive pt-3 mb-2">
+                    <table class="table table-bordered" id="studentTable">
+                        <thead>
+                            <tr>
+                                <th>S no.</th>
+                                <th>Roll no.</th>
+                                <th>Full name</th>
+                                <th>Address</th>
+                                <th>Phone no.</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+
+                            <tr class="table-warning">
+                                <td><%= data[i].s_no%></td>
+                                <td><%= data[i].s_rollno%></td>
+                                <td>
+                                    <%= data[i].s_name%>
+                                </td>
+                                <td>
+                                    <%= data[i].s_address%>
+                                </td>
+                                <td>
+                                    <%= data[i].s_phone%>
+                                </td>
+                                <td>
+                                    <a href="/Delete_Student/<%= data[i].s_rollno%>"> <button type="button"
+                                            class="btn btn-inverse-dark btn-icon m-2"><i class="ti-trash"></i>
+                                        </button></a>
+                                </td>
+                            </tr>
+                            <% } }else{ %>
+                            <tr>
+                                <td colspan="6">No Students Found...</td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <%- include('../Utils/footer'); -%>
