@@ -1,13 +1,17 @@
 const express = require("express");
 const path = require("path");
 const session = require("express-session");
-
+const connectToDatabase = require('./mongoose-connect');
 const app = express();
 const port = process.env.port || 3000;
 
 app.set("view engine", "ejs");
 var Routes = require("./routes/routes");
 app.use(express.static(__dirname + "/public"));
+
+
+
+
 
 // session
 app.use(
@@ -23,6 +27,7 @@ app.use(
     extended: true,
   })
 );
+connectToDatabase();
 
 // routes
 app.use("/", Routes);

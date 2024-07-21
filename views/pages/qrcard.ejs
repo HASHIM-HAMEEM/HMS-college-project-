@@ -1,173 +1,171 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title><%= title %></title>
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.4/jspdf.plugin.autotable.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student ID Card - <%= student.s_name %>
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
 
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card-container {
+            perspective: 1000px;
+            width: 350px;
+            height: 200px;
+        }
+
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .card-front,
+        .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-back {
+            background-color: #ffffff;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .student-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .student-details p {
+            margin: 5px 0;
+            font-size: 0.9em;
+            font-weight: 300;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+        }
+
+        #controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #764ba2;
+        }
+
+        #loading {
+            display: none;
+            margin-top: 10px;
+            color: #667eea;
+        }
+    </style>
 </head>
 
 <body>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-
-        #background {
-            left: 0px;
-            top: 0px;
-            position: relative;
-            margin-left: auto;
-            margin-right: auto;
-            width: 1125px;
-            height: 675px;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        #Layer0 {
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            width: 1125px;
-            height: 675px;
-            z-index: 1;
-        }
-
-        #BGDesign {
-            left: -409px;
-            top: -177px;
-            position: absolute;
-            width: 1266px;
-            height: 1379px;
-            z-index: 2;
-        }
-
-        #QrBorder {
-            left: 70px;
-            top: 80px;
-            position: absolute;
-            width: 700px;
-            height: 550px;
-            z-index: 4;
-        }
-
-        .qrimg {
-            width: 500px;
-            height: 500px;
-
-        }
-
-        #Qrcode {
-            left: 70px;
-            top: 80px;
-            position: absolute;
-            width: 550px;
-            height: 550px;
-            z-index: 5;
-        }
-
-        #Object {
-            left: 803px;
-            top: 448px;
-            position: absolute;
-            width: 225px;
-            height: 75px;
-            z-index: 16;
-        }
-
-        #YellowHomes {
-            left: 798px;
-            top: 507px;
-            color: #ded9d9;
-            position: absolute;
-            width: 234px;
-            height: 22px;
-            z-index: 17;
-        }
-
-        #webuildbetterhomes {
-            left: 800px;
-            top: 550px;
-            color: #ded9d9;
-            position: absolute;
-            width: 260px;
-            height: 16px;
-            z-index: 18;
-        }
-
-        #name {
-            left: 600px;
-            top: 130px;
-            color: #a29f9f;
-            position: absolute;
-            width: 255px;
-            height: 28px;
-            z-index: 24;
-        }
-
-        #kgp {
-            left: 600px;
-            top: 190px;
-            color: #a29f9f;
-            position: absolute;
-            width: 212px;
-            height: 21px;
-            z-index: 25;
-        }
-
-        #GUIDESHidethislayer {
-            left: 0px;
-            top: 0px;
-            position: absolute;
-            width: 1125px;
-            height: 675px;
-            z-index: 26;
-        }
-    </style>
-    <div id="body">
-
-        <div id="background">
-            <% if(data5.length){ for(var i=0; i< data5.length; i++) {%>
-            <div id="Layer0">
-                <img src="/images/qrcard/Layer0.png" />
+    <div class="card-container" id="cardContainer">
+        <div class="card" id="card">
+            <div class="card-front">
+                <div class="logo">KGP SRINAGAR</div>
+                <div class="student-name">
+                    <%= student.s_name %>
+                </div>
+                <div class="student-details">
+                    <p>Roll No: <%= student.s_rollno %>
+                    </p>
+                    <p>Parentage: <%= student.s_parantage %>
+                    </p>
+                    <p>Phone: <%= student.s_phone %>
+                    </p>
+                </div>
             </div>
-            <div id="BGDesign"><img src="/images/qrcard/BGDesign.png" /></div>
-            <div id="QrBorder"><img src="/images/qrcard/QrBorder.png" /></div>
-            <div id="Qrcode"><img class="qrimg" src="<%= data5[i].s_qrcode%>" /></div>
-
-            <div id="Object"><img src="/images/qrcard/Object.png" /></div>
-            <div id="YellowHomes">
-                <h1>THE DAWG</h1>
+            <div class="card-back">
+                <img class="qr-code" src="<%= qrCodeDataURL %>" alt="QR Code">
             </div>
-            <div id="webuildbetterhomes">
-                <h1>We love eachother</h1>
-            </div>
-            <div id="name">
-                <h1><%= data5[i].s_name%></h1>
-            </div>
-            <div id="kgp">
-                <h1>KGP Srinagar</h1>
-            </div>
-            <div id="GUIDESHidethislayer"><img src="/images/qrcard/GUIDESHidethislayer.png" /></div>
-            <% } }else{ %>
-            <div id="name">
-                <h1>No Data found</h1>
-            </div>
-            <% } %>
         </div>
     </div>
+    <div id="controls">
+        <button onclick="flipCard()">Flip Card</button>
+        <button onclick="generatePDF()">Download PDF</button>
+        <button onclick="window.location.href='/'">Back to Home</button>
+    </div>
+    <div id="loading">Generating PDF...</div>
 
     <script>
-        $(document).ready(function () {
-            window.print();
-            window.location.href = '/';
-        });
+        window.jsPDF = window.jspdf.jsPDF;
+
+        function flipCard() {
+            document.getElementById('card').style.transform =
+                document.getElementById('card').style.transform === 'rotateY(180deg)' ? 'rotateY(0deg)' : 'rotateY(180deg)';
+        }
+
+        function generatePDF() {
+            document.getElementById('loading').style.display = 'block';
+            const { jsPDF } = window.jspdf;
+            html2canvas(document.querySelector("#cardContainer")).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('l', 'mm', [80, 140]);
+                pdf.addImage(imgData, 'PNG', 0, 0, 140, 80);
+                pdf.save("<%= student.s_name %>_ID_Card.pdf");
+                document.getElementById('loading').style.display = 'none';
+            }).catch(err => {
+                console.error('Error generating PDF:', err);
+                alert('An error occurred while generating the PDF. Please try again.');
+                document.getElementById('loading').style.display = 'none';
+            });
+        }
     </script>
 </body>
 

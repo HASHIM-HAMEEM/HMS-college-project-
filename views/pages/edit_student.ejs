@@ -70,90 +70,83 @@
 </div>
 <div class="container rounded bg-white mt-3 mb-5">
     <% if(data2.length){ for(var i=0; i< data2.length; i++) {%>
-    <form method="post" active="">
-        <div class="row">
-            <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5"
-                        width="150px" src="https://thedawg.000webhostapp.com/images/<%= data2[i].s_image%>"><span
-                        class="font-weight-bold">
-                        <%= data2[i].s_name%>
-                    </span><span class="text-black-50">
-                        <%= data2[i].s_email%>
-                    </span><span>
-                    </span></div>
-            </div>
-            <div class="col-md-5 border-right">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="text-right">Student Profile Details</h4>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels">Roll number *</label>
-                            <input type="text" name="rollno" class="form-control" value="<%= data2[i].s_rollno%>"></div>
-                        <div class="col-md-6"><label class="labels">Full Name *</label>
-                            <input type="text" name="fname" class="form-control" value="<%= data2[i].s_name%>"></div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Phone Number *</label>
-                            <input type="text" class="form-control" name="phno" value="<%= data2[i].s_phone%>"></div>
-                        <div class="col-md-12"><label class="labels">Parentage</label><input type="text"
-                                class="form-control" name="parentage" value="<%= data2[i].s_parentage%>">
-                        </div>
-                        <div class="col-md-12"><label class="labels">Parent Phone Number *</label><input type="text"
-                                class="form-control" name="p_phno" value="<%= data2[i].s_p_phone%>">
-                        </div>
-                        <div class="col-md-12"><label class="labels">Batch </label><input type="text"
-                                class="form-control" name="batch" value="<%= data2[i].s_batch%>">
-                        </div>
+   <form method="POST" action="/Edit_Student/<%= data2[i].s_rollno %>"  class="mt-4">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10 col-sm-12">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title mb-4">Edit Student Information</h4>
+            
+   <div class="row mb-3">
+  <div class="col-md-6">
+    <label for="s_name" class="form-label">Student Name</label>
+    <input type="text" id="s_name" name="s_name" class="form-control" value="<%= data2[i].s_name%>" required>
+  </div>
+  <div class="col-md-6">
+    <label for="s_rollno" class="form-label">Roll Number</label>
+    <input type="text" id="s_rollno" name="s_rollno" class="form-control" value="<%= data2[i].s_rollno%>" required>
+  </div>
+</div>
 
-                        <div class="col-md-12"><label class="labels">Branch *</label><input type="text"
-                                class="form-control" name="branch" value="<%= data2[i].s_branch%>">
-                        </div>
-                        <div class="col-md-12"><label class="labels">Full Address</label><input type="text"
-                                class="form-control" name="address" value="<%= data2[i].s_address%>">
-                        </div>
-                        <div class="col-md-12"><label class="labels">Postcode</label><input type="text"
-                                class="form-control" name="pincode" value="<%= data2[i].s_pincode%>"></div>
-                        <div class="col-md-12"><label class="labels">Email *</label><input type="text"
-                                class="form-control" name="email" value="<%= data2[i].s_email%>">
-                        </div>
-                        <div class="col-md-12"><label class="labels">Password *</label>
-                            <input type="password" class="form-control" name="password"
-                                value="<%= data2[i].s_password_hash%>">
-                            <!-- <i class="bi bi-eye-slash"></i> -->
-                        </div>
-                        <div class="col-md-12 mt-3">
-                            <p>Hostal Details Need To Filled in this form --> "hostal"@"room"</p>
-                            <label class="labels">Hostel Details. *</label>
-                            <input type="text" class="form-control"
-                                placeholder="Please enter Hostal details If approved " name="hostal_details"
-                                value="<%= data2[i].s_hostal_details%>">
-                        </div>
-                    </div>
-                    <div class="mt-5 text-center">
-                        <button type="submit" onclick="return confirm('Are you sure !!!')"
-                            class="btn btn-primary profile-button mr-4">
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-3 py-5">
-                    <div class="d-flex justify-content-between align-items-center experience"><span>Edit
-                            Note</span><span class="border px-3 p-1 add-experience"><i
-                                class="fa fa-plus"></i>&nbsp;Note</span></div><br>
-                    <div class="col-md-12"><label class="labels">Enter Note . * </label>
-                        <input type="text" class="form-control" placeholder="Note About Student" name="note"
-                            value="<%= data2[i].s_note_emp%>">
-                        <br>
-                        <p class="text-danger">Only elements with <strong> *</strong> can be edited</p>
-                    </div> <br>
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="s_email" class="form-label">Email</label>
+    <input type="email" id="s_email" name="s_email" class="form-control" value="<%= data2[i].s_email%>" required>
+  </div>
+  <div class="col-md-6">
+    <label for="s_phone" class="form-label">Phone Number</label>
+    <input type="tel" id="s_phone" name="s_phone" class="form-control" value="<%= data2[i].s_phone%>" required>
+  </div>
+</div>
 
-                </div>
+<div class="mb-3">
+  <label for="s_address" class="form-label">Address</label>
+  <textarea id="s_address" name="s_address" class="form-control" rows="3" required><%= data2[i].s_address%></textarea>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="s_pincode" class="form-label">PINCODE</label>
+    <input type="text" id="s_pincode" name="s_pincode" class="form-control" value="<%= data2[i].s_pincode%>" required>
+  </div>
+  <div class="col-md-6">
+    <label for="s_roomNo" class="form-label">Room Number</label>
+    <input type="text" id="s_roomNo" name="s_roomNo" class="form-control" value="<%= data2[i].s_roomNo%>" required>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-md-6">
+    <label for="s_dob" class="form-label">Date of Birth</label>
+    <input type="date" id="s_dob" name="s_dob" class="form-control" value="<%= data2[i].s_dob%>" required>
+  </div>
+  <div class="col-md-6">
+    <label for="s_dateadm" class="form-label">Admission Date</label>
+    <input type="date" id="s_dateadm" name="s_dateadm" class="form-control" value="<%= data2[i].s_dateadm%>" required>
+  </div>
+</div>
+
+<div class="mb-3">
+  <label for="s_parantage" class="form-label">Parentage</label>
+  <input type="text" id="s_parantage" name="s_parantage" class="form-control" value="<%= data2[i].s_parantage%>" required>
+</div>
+
+<div class="mb-3">
+  <label for="note" class="form-label">Note</label>
+  <input type="text" id="note" name="note" class="form-control" value="<%= data2[i].s_note_emp%>">
+</div>
+            <div class="mt-4">
+              <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Are you sure?')">
+                Update Student
+              </button>
             </div>
+          </div>
         </div>
-    </form>
+      </div>
+    </div>
+  </div>
+</form>
     <% } }else{ %>
     <h1 colspan="3">No Student found</h1>
     <% } %>
