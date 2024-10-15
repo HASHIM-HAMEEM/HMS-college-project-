@@ -3,30 +3,26 @@ const path = require("path");
 const session = require("express-session");
 const connectToDatabase = require('./mongoose-connect');
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
-var Routes = require("./routes/routes");
+const Routes = require("./routes/routes");
 app.use(express.static(__dirname + "/public"));
 
-
-
-
+const studentsRoute = require('./routes/api/students');
 
 // session
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SESSION_SECRET || "secret",
     resave: true,
     saveUninitialized: true,
   })
 );
+
 app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
+app.use(express.urlencoded({ extended: true }));
+
 connectToDatabase();
 
 // routes
@@ -44,6 +40,9 @@ app.use("/Print_Card/:rollno", Routes);
 app.use("/Print/:rollno", Routes);
 app.use("/Delete_Student/:rollno", Routes);
 app.use("/Email_Service", Routes);
+
+// API routes
+app.use("/api/students", studentsRoute);
 
 app.listen(port, () => {
   console.log(`HMS app listening on port http://localhost:${port}`);

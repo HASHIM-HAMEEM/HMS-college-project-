@@ -1,168 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Add Student</title>
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css" />
     <link rel="stylesheet" href="vendors/base/vendor.bundle.base.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" href="images/TDlogo.png" />
+    <style>
+      body {
+        background-color: #f0f0f0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .header img {
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+      }
+
+      .back-button {
+        background-color: #6c757d;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+        margin: 0;
+      }
+
+      .section-title {
+        font-size: 18px;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+      }
+
+      .form-group {
+        flex: 1;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .btn-primary {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
   </head>
-  <body>
-    <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth px-0">
-          <div class="row w-100 mx-0">
-            <div class="col-lg-4 mx-auto">
-              <nav aria-label="breadcrumb">
-                <h1>Add Student</h1>
-                <p class="text-info">
-                  Fill in the details to add a new student
-                </p>
-              </nav>
-              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                <div class="brand-logo text-center">
-                  <img src="images/TDlogo.png" alt="THE DAWG LOGO" />
-                </div>
-                <%- include('../Utils/alert'); -%>
-                <h4 class="font-weight-light">Student Information</h4>
-                <form
-                  class="pt-3"
-                  method="post"
-                  action="/Add_Student"
-                  enctype="multipart/form-data"
-                >
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="sname"
-                      class="form-control form-control-lg"
-                      placeholder="Student Name"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="srollno"
-                      class="form-control form-control-lg"
-                      placeholder="RollNo"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="email"
-                      name="semail"
-                      class="form-control form-control-lg"
-                      placeholder="Email"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <textarea
-                      name="saddress"
-                      class="form-control form-control-lg"
-                      rows="3"
-                      placeholder="Address"
-                      required
-                    ></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="spincode"
-                      class="form-control form-control-lg"
-                      placeholder="PINCODE"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="tel"
-                      name="sphone"
-                      class="form-control form-control-lg"
-                      placeholder="Phone Number"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="date"
-                      name="sdob"
-                      class="form-control form-control-lg"
-                      placeholder="Date of Birth"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="date"
-                      name="sdateadm"
-                      class="form-control form-control-lg"
-                      placeholder="Admission Date"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="sroomNo"
-                      class="form-control form-control-lg"
-                      placeholder="Room Number"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      name="sparantage"
-                      class="form-control form-control-lg"
-                      placeholder="Parentage"
-                      required
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label for="simage" class="form-label">Student Photo</label>
-                    <input
-                      type="file"
-                      name="simage"
-                      id="simage"
-                      class="form-control form-control-lg"
-                      accept="image/*"
-                      required
-                    />
-                  </div>
-                  <div class="mt-3">
-                    <button
-                      type="submit"
-                      class="btn btn-primary btn-lg btn-block"
-                    >
-                      Add Student
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <button type="button" class="back-button" onclick="window.history.back();">Back</button>
+      <img src="images/TDlogo.png" alt="THE DAWG LOGO" />
+      <h1>Add Student</h1>
+    </div>
+
+    <%- include('../Utils/alert'); -%>
+
+      <form class="pt-3" method="post" action="/Add_Student" enctype="multipart/form-data">
+        <div class="section-title">Student Information</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sname">Student Name</label>
+            <input type="text" id="sname" name="sname" class="form-control form-control-lg" required />
+          </div>
+          <div class="form-group">
+            <label for="srollno">Roll No</label>
+            <input type="text" id="srollno" name="srollno" class="form-control form-control-lg" required />
           </div>
         </div>
-        <!-- content-wrapper ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-    </div>
-    <!-- container-scroller -->
-    <!-- plugins:js -->
-    <script src="vendors/base/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
-    <script src="js/off-canvas.js"></script>
-    <script src="js/hoverable-collapse.js"></script>
-    <script src="js/template.js"></script>
-    <script src="js/todolist.js"></script>
-    <!-- endinject -->
-  </body>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="semail">Email</label>
+            <input type="email" id="semail" name="semail" class="form-control form-control-lg" required />
+          </div>
+          <div class="form-group">
+            <label for="sphone">Phone Number</label>
+            <input type="tel" id="sphone" name="sphone" class="form-control form-control-lg" required />
+          </div>
+        </div>
+
+        <div class="section-title">Address</div>
+        <div class="form-group">
+          <label for="saddress">Address</label>
+          <textarea id="saddress" name="saddress" class="form-control form-control-lg" rows="3" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="spincode">PINCODE</label>
+            <input type="text" id="spincode" name="spincode" class="form-control form-control-lg" required />
+          </div>
+        </div>
+
+        <div class="section-title">Additional Information</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sdob">Date of Birth</label>
+            <input type="date" id="sdob" name="sdob" class="form-control form-control-lg" required />
+          </div>
+          <div class="form-group">
+            <label for="sdateadm">Admission Date</label>
+            <input type="date" id="sdateadm" name="sdateadm" class="form-control form-control-lg" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sroomNo">Room Number</label>
+            <input type="text" id="sroomNo" name="sroomNo" class="form-control form-control-lg" required />
+          </div>
+          <div class="form-group">
+            <label for="sparantage">Parentage</label>
+            <input type="text" id="sparantage" name="sparantage" class="form-control form-control-lg" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="simage">Student Photo</label>
+          <input type="file" id="simage" name="simage" class="form-control form-control-lg" accept="image/*" required />
+        </div>
+
+        <div class="mt-3">
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Add Student
+          </button>
+        </div>
+      </form>
+  </div>
+
+  <script src="vendors/base/vendor.bundle.base.js"></script>
+  <script src="js/off-canvas.js"></script>
+  <script src="js/hoverable-collapse.js"></script>
+  <script src="js/template.js"></script>
+  <script src="js/todolist.js"></script>
+</body>
+
+</html>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>
+  <%= title %>
+</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Poppins:wght@400;600&display=swap"
+  rel="stylesheet">
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+
+  .playful-header {
+    background: linear-gradient(45deg, #FF9A8B, #FF6B6B, #4ECDC4);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Fredoka One', cursive;
+  }
+
+  .playful-header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-links {
+    margin-top: 15px;
+  }
+
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+</style>
+</head>
+
+</body>
+
 </html>
