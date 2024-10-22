@@ -10,6 +10,7 @@ const Routes = require("./routes/routes");
 app.use(express.static(__dirname + "/public"));
 
 const studentsRoute = require('./routes/api/students');
+const messRoute = require('./routes/api/mess');
 
 // session
 app.use(
@@ -43,6 +44,7 @@ app.use("/Email_Service", Routes);
 
 // API routes
 app.use("/api/students", studentsRoute);
+app.use("/api/mess", messRoute);
 
 app.listen(port, () => {
   console.log(`HMS app listening on port http://localhost:${port}`);
