@@ -1,68 +1,61 @@
 const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose');
 const User = require('../../DbModels/ModelStudentdetails');
-const Translog = require('../../DbModels/ModelTransaction');
+const Transaction= require('../../DbModels/ModelTransaction');
 const Wallet = require('../../DbModels/ModelWallet');
-
+var uuid = require("uuid");
 // Environment secret key for JWT
 const JWT_SECRET = process.env.JWT_SECRET || "your_jwt_secret_key";  // Use environment variable in production
 
 // POST transaction route
 router.post('/dtTransaction', async (req, res) => {
-  const { studentId, meal, amount } = req.body;
-
-  // Input validation
-  if (!studentId || !meal || !amount || isNaN(amount) || amount <= 0) {
-    return res.status(400).json({ msg: 'Please provide valid studentId, meal, and a positive amount' });
-  }
-
-  const session = await mongoose.startSession();
-  session.startTransaction();
-
   try {
-    // Check if the wallet exists and has sufficient balance
-    const existingWallet = await Wallet.findOne({ studentId }).session(session);
-    if (!existingWallet) {
-      throw new Error('Wallet not found');
-    }
-    if (existingWallet.amount < amount) {
-      throw new Error('Insufficient balance');
+    const { studentId, meal, amount } = req.body;
+console.log(req.body)
+    // Basic validation
+    if (!studentId || !meal || !amount) {
+      return res.status(400).json({ msg: 'Please provide studentId, meal, and amount' });
     }
 
-    // Update wallet
-    const updatedWallet = await Wallet.findOneAndUpdate(
-      { studentId },
+    // Find and update wallet in one operation
+    const wallet = await Wallet.findOneAndUpdate(
+      { student_id: studentId },
       {
-        $inc: { amount: -amount },
-        $set: { 
-          date: new Date(),
-          remark: meal
-        }
+        $inc: { amount: +amount },
+        date: new Date(),
+        remark: meal
       },
-      { new: true, session }
+      { new: true }
     );
 
-    // Create log entry
-    const log = new Translog({
+    // Check if wallet exists
+    if (!wallet) {
+      return res.status(404).json({ msg: 'Wallet not found' });
+    }
+    const Tid = uuid.v4();
+
+    // Create transaction log
+    const log = await Transaction.create({
       student_id: studentId,
       dt_ct: 'dt',
-      transaction_id: `${studentId}-UHFTA-${new mongoose.Types.ObjectId()}`,
-      amount,
+      transiction_id: `${studentId}-UHFTA-${Tid}`,
+      amount: amount,
       date: new Date(),
       remarks: meal
     });
-    await log.save({ session });
 
-    await session.commitTransaction();
-    res.status(200).json({ message: 'Transaction successful', wallet: updatedWallet, log });
+    // Send success response
+    return res.status(200).json({
+      message: 'Transaction successful',
+      wallet,
+      log
+    });
+
   } catch (err) {
-    await session.abortTransaction();
     console.error(err.message);
-    res.status(400).json({ msg: err.message });
-  } finally {
-    session.endSession();
+    return res.status(500).json({ msg: 'Server error', error: err.message });
   }
 });
 
 module.exports = router;
+
