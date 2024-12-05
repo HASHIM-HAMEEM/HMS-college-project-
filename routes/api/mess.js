@@ -21,7 +21,7 @@ console.log(req.body)
     const wallet = await Wallet.findOneAndUpdate(
       { student_id: studentId },
       {
-        $inc: { amount: +amount },
+        $inc: { amount: -amount },
         date: new Date(),
         remark: meal
       },
