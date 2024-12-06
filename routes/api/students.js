@@ -83,7 +83,7 @@ router.post('/login', async (req, res) => {
 
 
 // GET student details using JWT
-router.get('/getdetails', verifyToken, async (req, res) => {
+router.post('/getdetails', verifyToken, async (req, res) => {
   try {
     const student = await User.findById(req.user.id).select('-s_password');
     
@@ -100,7 +100,7 @@ router.get('/getdetails', verifyToken, async (req, res) => {
 
 
 
-router.get('/getlog', verifyToken, async (req, res) => {
+router.post('/getlog', verifyToken, async (req, res) => {
   try {
     // // First, find the student using the ID from the JWT
     // const student = await User.findById(req.user.id);
